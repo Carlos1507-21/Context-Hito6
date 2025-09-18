@@ -1,0 +1,46 @@
+/* src/styles/NotFound.css */
+.notfound-container {
+  min-height: calc(100vh - 160px); /* resta header y footer si los tienes */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: linear-gradient(180deg, #f9f9f9 0%, #ffffff 100%);
+}
+
+.notfound-container h1 {
+  font-size: 5rem;
+  font-weight: 800;
+  color: #dc3545; /* rojo Bootstrap */
+  margin: 0;
+}
+
+.notfound-container h2 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.notfound-container p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.home-link {
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  background-color: #0d6efd; /* azul Bootstrap */
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s, transform 0.15s;
+}
+
+.home-link:hover {
+  background-color: #0b5ed7;
+  transform: translateY(-2px);
+}

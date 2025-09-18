@@ -1,0 +1,27 @@
+.profile-container {
+  text-align: center;
+  padding: 3rem;
+}
+
+.profile-container h1 {
+  margin-bottom: 1rem;
+}
+
+.profile-container p {
+  font-size: 1.2rem;
+}
+
+.logout-button {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.logout-button:hover {
+  background-color: #a71d2a;
+}
