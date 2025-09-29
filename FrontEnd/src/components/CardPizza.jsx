@@ -1,34 +1,29 @@
-import React from "react";
+import { useCart } from "../context/CartContext";
 
-function CardPizza({ name, price, ingredients, img }) {
+function CardPizza({ id, name, price, ingredients, img }) {
+  const { addToCart } = useCart();
+
   return (
     <div className="card shadow-sm h-100" style={{ width: "18rem" }}>
       {/* Imagen */}
       <img src={img} className="card-img-top" alt={name} />
 
-      <div className="card-body d-flex flex-column">
-        {/* Nombre de la pizza */}
-        <h5 className="card-title text-center">{name}</h5>
-
-        {/* Lista de ingredientes */}
-        <h6>Ingredientes:</h6>
-        <ul className="list-unstyled">
-          {ingredients.map((ing, index) => (
-            <li key={index}>🍕 {ing}</li>
-          ))}
-        </ul>
-
-        {/* Precio y botón */}
-        <div className="mt-auto">
-          <p className="fw-bold text-center">
-            Precio: ${price.toLocaleString("es-CL")}
-          </p>
-          <button className="btn btn-primary w-100">Añadir al carrito</button>
-        </div>
+      {/* Info */}
+      <div className="card-body">
+        <h5 className="card-title">{name}</h5>
+        <p className="card-text">Ingredientes: {ingredients.join(", ")}</p>
+        <p className="card-text fw-bold">Precio: ${price}</p>
+        <button
+          className="btn btn-danger"
+          onClick={() =>
+            addToCart({ id, name, price, img }) // 🔹 Se envía al carrito
+          }
+        >
+          Añadir al carrito
+        </button>
       </div>
     </div>
   );
 }
 
 export default CardPizza;
-

@@ -3,10 +3,9 @@ import Header from "../components/Header";
 import CardPizza from "../components/CardPizza";
 
 const Home = () => {
-  const [pizzas, setPizzas] = useState([]); // Estado para las pizzas
+  const [pizzas, setPizzas] = useState([]);
 
   useEffect(() => {
-    // Llamada a la API (reemplaza la URL con la tuya real)
     fetch("http://localhost:5000/api/pizzas")
       .then((res) => res.json())
       .then((data) => setPizzas(data))
@@ -20,6 +19,7 @@ const Home = () => {
         {pizzas.map((pizza) => (
           <div className="col-md-4 mb-4" key={pizza.id}>
             <CardPizza
+              id={pizza.id}
               name={pizza.name}
               price={pizza.price}
               ingredients={pizza.ingredients}
@@ -33,5 +33,4 @@ const Home = () => {
 };
 
 export default Home;
-
 
