@@ -5,7 +5,7 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
-  // ➕ Agregar producto
+  // Agregar producto
   const addToCart = (product) => {
     setCart((prevCart) => {
       const itemExists = prevCart.find((item) => item.id === product.id);
@@ -20,7 +20,7 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  // ➖ Disminuir cantidad (con control)
+  // Disminuir cantidad
   const decreaseQty = (id) => {
     setCart((prevCart) =>
       prevCart
@@ -29,28 +29,23 @@ export const CartProvider = ({ children }) => {
             ? { ...item, quantity: item.quantity - 1 }
             : item
         )
-        .filter((item) => item.quantity > 0) // elimina si llega a 0
+        .filter((item) => item.quantity > 0) // elimina solo si llega a 0
     );
   };
 
-  // ❌ Eliminar producto
+  // Eliminar completamente
   const removeFromCart = (id) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
-  // 🧹 Vaciar carrito
-  const clearCart = () => {
-    setCart([]);
-  };
-
-  // 💰 Total de la compra
+  // Calcular total
   const getTotal = () => {
     return cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
   };
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, decreaseQty, removeFromCart, clearCart, getTotal }}
+      value={{ cart, addToCart, decreaseQty, removeFromCart, getTotal }}
     >
       {children}
     </CartContext.Provider>

@@ -13,11 +13,13 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container mt-4">
       <Header />
-      <div className="row mt-4">
+
+      {/* Grilla de pizzas */}
+      <div className="row">
         {pizzas.map((pizza) => (
-          <div className="col-md-4 mb-4" key={pizza.id}>
+          <div key={pizza.id} className="col-md-4 mb-4 d-flex justify-content-center">
             <CardPizza
               id={pizza.id}
               name={pizza.name}
@@ -33,4 +35,3 @@ const Home = () => {
 };
 
 export default Home;
-

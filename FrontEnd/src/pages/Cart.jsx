@@ -1,7 +1,9 @@
 import { useCart } from "../context/CartContext";
+import { useUser } from "../context/UserContext";
 
 function Cart() {
   const { cart, addToCart, decreaseQty, removeFromCart, getTotal } = useCart();
+  const { token } = useUser(); // ✅ Obtenemos el token
 
   return (
     <div className="container mt-5">
@@ -17,7 +19,7 @@ function Cart() {
               <th>Precio</th>
               <th>Cantidad</th>
               <th>Subtotal</th>
-              <th></th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -25,50 +27,45 @@ function Cart() {
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>${item.price.toLocaleString("es-CL")}</td>
-                <td>
-                  <div className="d-flex justify-content-center align-items-center gap-2">
-                    <button
-                      className="btn btn-sm btn-outline-danger"
-                      onClick={() => decreaseQty(item.id)} // 👈 ahora resta de a 1
-                    >
-                      ➖
-                    </button>
-                    <span>{item.quantity}</span>
-                    <button
-                      className="btn btn-sm btn-outline-success"
-                      onClick={() => addToCart(item)}
-                    >
-                      ➕
-                    </button>
-                  </div>
-                </td>
-                <td>
-                  ${(item.price * item.quantity).toLocaleString("es-CL")}
-                </td>
+                <td>{item.quantity}</td>
+                <td>${(item.price * item.quantity).toLocaleString("es-CL")}</td>
                 <td>
                   <button
-                    className="btn btn-sm btn-outline-dark"
-                    onClick={() => removeFromCart(item.id)} // 👈 este sí elimina todo el producto
+                    className="btn btn-sm btn-outline-danger me-1"
+                    onClick={() => decreaseQty(item.id)}
                   >
-                    🗑 Eliminar
+                    ➖
+                  </button>
+                  <button
+                    className="btn btn-sm btn-outline-success me-1"
+                    onClick={() => addToCart(item)}
+                  >
+                    ➕
+                  </button>
+                  <button
+                    className="btn btn-sm btn-outline-secondary"
+                    onClick={() => removeFromCart(item.id)}
+                  >
+                    🗑
                   </button>
                 </td>
               </tr>
             ))}
             <tr>
-              <td colSpan="4" className="text-end fw-bold">
+              <td colSpan="3" className="text-end fw-bold">
                 Total:
               </td>
-              <td className="fw-bold">
-                ${getTotal().toLocaleString("es-CL")}
-              </td>
+              <td className="fw-bold">${getTotal().toLocaleString("es-CL")}</td>
+              <td></td>
             </tr>
           </tbody>
         </table>
       )}
 
       {cart.length > 0 && (
-        <button className="btn btn-success mt-3">Finalizar Compra</button>
+        <button className="btn btn-success mt-3" disabled={!token}>
+          Finalizar Compra
+        </button>
       )}
     </div>
   );
